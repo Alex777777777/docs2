@@ -1,0 +1,70 @@
+.sd_hd{
+font-size:24pt;
+text-align: center;
+margin-top: 20px;
+}
+.sd_bd{
+margin-left: 20px;
+}
+.bd_item{
+width: 250px;
+max-width: 250px;
+height: 120px;
+max-height: 120px;
+margin: 10px;
+float: left;
+background: #ddd;
+box-shadow: 0 0 5px #000;
+overflow:hidden;
+}
+.bd_item:hover{
+box-shadow: 2px 2px  10px #000;
+}
+
+.it_caps{
+display: block;
+font-size: 14pt;
+background: rgb(240,240,0);
+padding: 0 4px 0 10px;
+overflow: hidden;
+height: 23px;
+}
+.it_desc{
+font-style: italic;
+padding: 5px;
+height: 80px;
+overflow: hidden;
+}
+.it_desc>div{
+position:absolute;
+display: none;
+background: rgba(0,0,0,0.8);
+color:#fff;
+width:25px;
+height: 25px;
+text-align: center;
+border-radius:4px;
+box-shadow:0 0 2px #000;
+z-index:10;
+cursor:pointer;
+}
+.it_desc>div:hover{
+    box-shadow:2px 2px 5px #000;
+}
+.it_bts{
+position:relative;
+display:flex;
+float:right;
+}
+.it_bts>div:hover{
+font-weight: 600;    
+}
+.it_bts>div{
+    cursor:pointer;
+    margin: 0 2px;
+}
+.it_bt_e{
+font-size: 20pt;
+position: relative;
+top: -3px;
+}

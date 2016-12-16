@@ -1,0 +1,9 @@
+<?php
+  $do="docs";
+  if(isset($_GET["do"]))$_SESSION['do']=$_GET["do"];
+  if(isset($_SESSION['do']))$do=$_SESSION['do'];
+  $do.=".tpl";
+  require("header.tpl");
+  require("menu.tpl");
+  require("footer.tpl");
+?>

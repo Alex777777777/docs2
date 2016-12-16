@@ -1,0 +1,49 @@
+.sd_hd{
+    font-size:24pt;
+    text-align: center;
+    margin-top: 20px;
+}
+form{
+display: block;
+margin: 20px 5px 10px 15px;
+}
+label{
+width: 135px;
+display: block;
+}
+input{
+    width:280px;
+}
+select{
+    width:250px;
+}
+.frm_str{
+margin: 10px 0;
+display: flex;
+}
+#usr_ispass{
+    width:40px;
+    margin-top: 20px;
+}
+.button{
+margin-left: 235px;
+width: 150px;
+color: #ccc;
+background: #000;
+text-align: center;
+border-radius: 6px;
+height: 25px;
+line-height: 25px;
+box-shadow: 0 0 5px #000;
+cursor:pointer;
+}
+.button:hover{
+box-shadow: 2px 2px 10px #000;
+color:#fff;
+}
+#usr_resume{
+display:block;
+text-align: center;
+color:green;
+width: 400px;
+}

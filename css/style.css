@@ -1,0 +1,38 @@
+body{
+    min-width: 800px;
+}
+.hd_panel{
+    position:fixed;
+    left:0px;
+    top:0px;
+    height: 35px;
+    width:100%;
+    background: rgba(240, 240, 0, 0.8);
+}
+.hd_panel>.btn{
+    position:absolute;
+}
+.btn{
+position: absolute;
+width: 100px;
+height: 30px;
+text-align: center;
+line-height: 30px;
+background: #555;
+color:#aaa;
+box-shadow: 0 0 2px #000;
+border-radius:6px;
+cursor:pointer;
+}
+.btn:hover{
+color:#fff;
+box-shadow: 2px 2px 5px #000;
+}
+.btn[data-id='logout']{
+left: 600px;
+top: -5px;
+}
+.btn[data-id='back']{
+left:-5px;
+top:2px;
+}

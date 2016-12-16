@@ -1,0 +1,7 @@
+.wrap{display:flex;min-width: 900px;margin-top:20px;}
+.mmenu{width:200px;text-align: center;}
+.smenu{margin-bottom:10px;border: 1px solid;padding-bottom: 10px;}
+.smenu>h4{display:block;margin:10px auto;}
+.mitem{width: 90%;margin: 5px auto;padding: 5px 0;background: gray;cursor: pointer;box-shadow: 0 0 3px #000;}
+.mitem:hover{background: black;color:white;box-shadow: 2px 2px 5px #000;}
+.side{min-width: 600px;}
