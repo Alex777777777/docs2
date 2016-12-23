@@ -1,13 +1,34 @@
 .side{
 }
 .sd_hd{
-font-size:24pt;
+font-size:14pt;
+text-align: left;
+display: flex;
+width: 800px;
+margin: 30px 10px 10px 25px;
+}
+.hdl{width: 600px;}
+.hdl>div{width:100%;}
+.hdl>div>input{width: 550px;}
+.hdr{width: 200px;padding:5px;}
+.hdr>div>input{width: 180px;}
+.hd_btn{width: 150px;
+margin: 10px auto;
 text-align: center;
-margin-top: 20px;
+background: #aaa;
+cursor:pointer;
+}
+
+.hd_btn:hover{
+    box-shadow: 1px 1px 5px #000;
+}
+.doc{
+
 }
 .sd_bd{
 margin: 20px 0 0 20px;
 }
+
 .col{
 width:100px;
 float: left;
@@ -20,8 +41,8 @@ background: #aaa;
 width:40px;
 }
 .col0>div{
-    margin:0 auto;
-    text-align: center;
+margin:0 auto;
+text-align: center;
 }
 .row{
 display:block;

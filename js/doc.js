@@ -23,8 +23,57 @@ $(window).ready(function(){
     $("#inped").keydown(function(e) {
         if(e.keyCode === 13) {
             lid=$(this).attr("data-id");
-            LastCell.children("div").html($(this).val());
+            lval=$(this).val();
+            LastCell.children("div").html(lval);
+            ldoc=LastCell.parent().parent().attr("data-id");
             $(this).css("display","none");
+            param={
+            "tpl":"editdoc",
+            "do":"set",
+            "val":lval,
+            "doc":ldoc,
+            "id":lid
+            }
+            $.ajax({
+                type: "POST",
+                url: "command.php",
+                data: param,
+                cache: false,
+                async: true,
+                success: function(qstr){
+                    if(qstr=="0"){
+                        LastCell.children().html("Ошибка!");
+                    };           
+                }
+            })
         }
     })
+    $(".hd_btn").click(function(){
+        lname=$("#tb_name").val();
+        ldescr=$("#tb_descr").val();
+        lrows=$("#tb_rows").val();
+        lcols=$("#tb_cols").val();
+        param={
+            "tpl":"editdoc",
+            "do":"name",
+            "name":lname,
+            "descr":ldescr,
+            "rows":lrows,
+            "cols":lcols,
+            }
+            $.ajax({
+                type: "POST",
+                url: "command.php",
+                data: param,
+                cache: false,
+                async: true,
+                success: function(qstr){
+                    if(qstr=="0"){
+                        alarm("Ошибка!");
+                    }else location.reload();           
+                }
+            })
+    })
+    wh=DocColsCount*105+80;
+    $(".row").css("width",wh+"px");
 })
