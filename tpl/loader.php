@@ -1,9 +1,9 @@
 <?php
-  $do="docs";
+  $do="docsa";
   if(isset($_GET["do"]))$_SESSION['do']=$_GET["do"];
   if(isset($_SESSION['do']))$do=$_SESSION['do'];
   if(($do=='doc')AND(!isset($_GET["item"]))){
-      $do="docs";
+      $do="docsa";
   }
   $do.=".tpl";
   require("header.tpl");

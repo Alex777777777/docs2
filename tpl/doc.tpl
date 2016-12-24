@@ -1,6 +1,9 @@
 <?php
 require($PathLoc."/cls/docs.cls");
 require($PathLoc."/cls/item.cls");
+require($PathLoc."/cls/access.cls");
+$acs=new Access();
+$acs->ClearLock($user->id);
 $lid=$_GET["item"];
 $doc=new Docs();
 $doc->GetItem($lid);

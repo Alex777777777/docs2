@@ -1,12 +1,10 @@
 var LastCell;
-$(window).ready(function(){
-    $(".col").click(function(){
-        LastCell=$(this);
-        txt=$(this).children("div").html();
-        ll=$(this)[0].offsetLeft;
-        lt=$(this)[0].offsetTop;
-        lw=$(this)[0].clientWidth-4;
-        lh=$(this)[0].clientHeight-4;
+function MoveEdt(){
+    if(LastCell){
+        ll=LastCell[0].offsetLeft;
+        lt=LastCell[0].offsetTop;
+        lw=LastCell[0].clientWidth-4;
+        lh=LastCell[0].clientHeight-4;
         edt=$("#inped");
         edt.css({
             "width":lw,
@@ -15,14 +13,77 @@ $(window).ready(function(){
             "left":ll,
             "display":"block"
         });
+    };
+}
+$(window).resize(function(){
+    MoveEdt();
+});
+$(document).ready(function(){
+    $(".col").click(function(){
+        LastCell=$(this);
+        txt=LastCell.children("div").html();
+        ldoc=LastCell.parent().parent().attr("data-id");
+        lid=LastCell.attr("data-id");
+        edt=$("#inped");
+        
+        edt.css({"background":"#f8f8c8"});
+        edt.attr("readonly",false);
+        //pid=edt.attr("data-id");
+        /*if(pid){
+        param={
+        "tpl":"editdoc",
+        "do":"unlock",
+        "doc":ldoc,
+        "id":pid
+        }
+        $.ajax({
+            type: "POST",
+            url: "command.php",
+            data: param,
+            cache: false,
+            async: true,
+            success: function(qstr){                
+            }
+        })
+        };*/
+        edt.attr("data-id",LastCell.attr("data-id"));
+        param={
+        "tpl":"editdoc",
+        "do":"access",
+        "doc":ldoc,
+        "id":lid
+        }
+        $.ajax({
+            type: "POST",
+            url: "command.php",
+            data: param,
+            cache: false,
+            async: true,
+            success: function(qstr){
+                ret=JSON.parse(qstr);
+                edt=$("#inped");
+                if(ret.lock=="lock"){
+                    edt.css({
+                        "background":"red",
+                    });
+                    edt.attr("readonly",true);
+                    edt.attr("title","Заблокировано "+ret.user+" "+ret.date);
+                }else{
+                    edt.css({
+                        "background":"#f8f8c8"
+                    });
+                    edt.attr("readonly",false);
+                }                
+            }
+        })
+        MoveEdt();
         edt.val(txt);
         edt.select();
-        edt.attr("data-id",$(this).attr("data-id"))
-        
     })
     $("#inped").keydown(function(e) {
         if(e.keyCode === 13) {
             lid=$(this).attr("data-id");
+            $(this).removeAttr("data-id");
             lval=$(this).val();
             LastCell.children("div").html(lval);
             ldoc=LastCell.parent().parent().attr("data-id");

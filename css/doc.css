@@ -35,10 +35,11 @@ float: left;
 border:1px solid #999;
 min-height: 20px;
 min-height: 20px;
+max-height: 20px;
 overflow:hidden;
 }
 .col>div{
-    width:4000px;
+    width:100%;
 }
 .col0{
 background: #aaa;
