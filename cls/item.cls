@@ -90,6 +90,17 @@ class Item{
 
     function __destruct() {
     }
+    function GetMaxItem(){
+        global $mdb;
+        $lsql="SELECT MAX(id)as mid FROM ".$this->tbl;
+        $mdb->do_query($lsql);
+        if($mdb->LastErr){
+            $ret=$mdb->GetRow();
+            if($ret){
+                return($ret["mid"]);
+            }else return("0");
+        }else return("0");
+    }
     function GetValue($lid){
         global $mdb;
         $lsql="SELECT * FROM ".$this->tbl." WHERE id=$lid";
@@ -107,7 +118,8 @@ class Item{
     }
     function Add(){
         global $mdb;
-        $lsql="INSERT INTO  ".$this->tbl."(value,cell_id) VALUES('".$this->value."',".$this->cell_id.")";
+        global $user;
+        $lsql="INSERT INTO  ".$this->tbl."(value,cell_id,user) VALUES('".$this->value."',".$this->cell_id.",".$user->id.")";
         $mdb->do_query($lsql);
         if($mdb->LastErr){
             $this->id=mysqli_insert_id($mdb->lCon);

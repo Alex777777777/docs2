@@ -1,4 +1,5 @@
 var LastCell;
+var TimeOfUpdate=10000;
 function MoveEdt(){
     if(LastCell){
         ll=LastCell[0].offsetLeft;
@@ -14,6 +15,38 @@ function MoveEdt(){
             "display":"block"
         });
     };
+}
+function GetUpdates(){
+    doc_id=$(".doc").attr("data-id");    
+    param={
+        "tpl":"updatedoc",
+        "doc":doc_id,
+        "id":DocItCount
+    }
+    $.ajax({
+        type: "POST",
+        url: "command.php",
+        data: param,
+        cache: false,
+        async: true,
+        success: function(qstr){
+            ret=JSON.parse(qstr);
+            if(!ret) return;
+            if(ret.stat="OK"){
+                ldt=ret.data;
+                ldt.forEach(function(arr) {
+                    DocItCount=arr.id;
+                    lkey=".col[data-id=\"{'row':"+arr.row+",'col':"+arr.col+"}\"]";
+                    $(lkey).children("div").html(arr.val);
+                    ltxt="Изменил "+arr.user+" "+arr.date;
+                    $(lkey).attr("title",ltxt);
+                    $(lkey).css("background","#d1eaf6");
+                    
+                });
+            }                
+        }
+    })    
+setTimeout("GetUpdates()",TimeOfUpdate);
 }
 $(window).resize(function(){
     MoveEdt();
@@ -137,4 +170,5 @@ $(document).ready(function(){
     })
     wh=DocColsCount*105+80;
     $(".row").css("width",wh+"px");
+    GetUpdates();
 })

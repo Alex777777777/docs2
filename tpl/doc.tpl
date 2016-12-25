@@ -4,6 +4,8 @@ require($PathLoc."/cls/item.cls");
 require($PathLoc."/cls/access.cls");
 $acs=new Access();
 $acs->ClearLock($user->id);
+$itm=new Item();
+$mitem=$itm->GetMaxItem();
 $lid=$_GET["item"];
 $doc=new Docs();
 $doc->GetItem($lid);
@@ -12,6 +14,7 @@ $cell=new Cell();
 <script>
 DocRowsCount=<?= $doc->rows;?>;
 DocColsCount=<?= $doc->cols;?>;
+DocItCount=<?= $mitem;?>;
 </script>
 <div class="sd_hd">
 <div class="hdl"><div>Имя:<input id="tb_name" type="text" value='<?= $doc->name;?>'></div>
