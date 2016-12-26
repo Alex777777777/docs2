@@ -1,4 +1,4 @@
-Host : localhost
+Host : 127.0.0.1
 Name DB : docs
-User: user
-Pass: usr123zx
+User: root
+Pass:
