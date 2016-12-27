@@ -45,11 +45,11 @@ for($ii=0;$ii <= $doc->cols;$ii++){
     $cell->GetValue();
     if($ii==0){
 ?>
-    <div class="col col<?= $ii;?>" data-id="{<?= '"row":'.$i.',"col":'.$ii?>}"><div><?php if($i)echo $i;?></div></div>
+    <div class="col col<?= $ii;?>" data-id="{<?='*row*:'.$i.',*col*:'.$ii?>}"><div><?php if($i)echo $i;?></div></div>
 <?php        
     }else{
 ?>
-    <div class="col col<?= $ii;?>" data-id="{<?= '"row:'.$i.',"col":'.$ii?>}"><div><?= $cell->value;?></div></div>
+    <div class="col col<?= $ii;?>" data-id="{<?='*row*:'.$i.',*col*:'.$ii?>}"><div><?= $cell->value;?></div></div>
 <?php
     }
 }
