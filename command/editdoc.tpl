@@ -62,6 +62,10 @@ switch($ldo){
         };
         exit;
     break;
+    case "colup":
+        echo json_encode($_POST);
+        exit;
+    break;
 }
 
 if($obj->LastErr)echo "0";

@@ -24,6 +24,7 @@ DocItCount=<?= $mitem;?>;
 <div>Строк:<input id="tb_rows" type="text" value='<?= $doc->rows;?>'></div>
 <div>Колонок:<input id="tb_cols" type="text" value='<?= $doc->cols;?>'></div>
 <div class="hd_btn">Записать</div>
+<button id="save_col">отправить</button>
 </div>
 </div>
 

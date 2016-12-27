@@ -1,5 +1,10 @@
 var LastCell;
 var TimeOfUpdate=10000;
+var colsParam = {
+    "tpl":"editdoc",
+    "do":"colup",
+    "val":{},
+};
 function SetValueEdt(obj){
     lid=obj.attr("data-id");
     obj.removeAttr("data-id");
@@ -183,6 +188,8 @@ $(document).ready(function(){
        var sel = 'col'+$(this).parent().attr('data-id')+', .head'+$(this).parent().attr('data-id');
        $('.row').width($('.row').width()+10);
        $('.'+sel).width($(this).parent().width()+10);
+       var column = $(this).parent().attr('data-id');
+       colsParam.val[column] = $(this).parent().width();
        MoveEdt();
     });
     $('.head span.sm').click(function(){
@@ -191,12 +198,30 @@ $(document).ready(function(){
        if((lwd-10)>24){
        $('.row').width($('.row').width()-10);
        $('.'+sel).width(lwd-10);
+       var column = $(this).parent().attr('data-id');
+       colsParam.val[column] = $(this).parent().width();
        MoveEdt();
        };
     });
     $( ".doc" ).scroll(function() {
         MoveEdt();
     });
+    
+    
+    $('#save_col').click(function(){
+        $.ajax({
+                type: "POST",
+                url: "command.php",
+                data: colsParam,
+                cache: false,
+                async: true,
+                success: function(qstr){
+                     colsParam.val = {};
+                    console.log(qstr);           
+                }
+            });
+    });
+    
     wh=DocColsCount*102+43;
     $(".row").css("width",wh+"px");
     GetUpdates();
