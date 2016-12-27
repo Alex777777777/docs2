@@ -6,7 +6,8 @@ switch($ldo){
         require("cls/access.cls");
         $acs=new Access();
         $obj=new Cell();
-        $lid=json_decode($_POST["id"] ,true);
+        $lid=str_replace("*",'"',$_POST["id"]);
+        $lid=json_decode($lid ,true);
         $obj->doc_id=$_POST["doc"];
         $obj->row=$lid["row"];
         $obj->col=$lid["col"];
@@ -30,7 +31,8 @@ switch($ldo){
         require("cls/access.cls");
         $acs=new Access();
         $acs->doc=$_POST["doc"];
-        $lid=json_decode($_POST["id"] ,true);
+        $lid=str_replace("*",'"',$_POST["id"]);
+        $lid=json_decode($lid ,true);
         $acs->row=$lid["row"];
         $acs->col=$lid["col"];
         $acs->Get();
@@ -48,7 +50,8 @@ switch($ldo){
         require("cls/access.cls");
         $acs=new Access();
         $acs->doc=$_POST["doc"];
-        $lid=json_decode($_POST["id"] ,true);
+        $lid=str_replace("*",'"',$_POST["id"]);
+        $lid=json_decode($lid ,true);
         $acs->row=$lid["row"];
         $acs->col=$lid["col"];
         $acs->Get();

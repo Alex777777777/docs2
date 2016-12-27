@@ -34,15 +34,16 @@ function GetUpdates(){
             if(!ret) return;
             if(ret.stat="OK"){
                 ldt=ret.data;
-                ldt.forEach(function(arr) {
+                for(i=0;i<ldt.length;i++ ){
+                    arr=ldt[i];
                     DocItCount=arr.id;
-                    lkey=".col[data-id=\"{'row':"+arr.row+",'col':"+arr.col+"}\"]";
+                    lkey=".col[data-id='{*row*:"+arr.row+",*col*:"+arr.col+"}']";
                     $(lkey).children("div").html(arr.val);
                     ltxt="Изменил "+arr.user+" "+arr.date;
                     $(lkey).attr("title",ltxt);
                     $(lkey).css("background","#d1eaf6");
                     
-                });
+                };
             }                
         }
     })    
