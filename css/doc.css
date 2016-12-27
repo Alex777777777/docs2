@@ -23,7 +23,8 @@ cursor:pointer;
     box-shadow: 1px 1px 5px #000;
 }
 .doc{
-
+overflow: auto;
+min-width: 800px;
 }
 .sd_bd{
 margin: 20px 0 0 20px;
@@ -56,3 +57,31 @@ min-height: 22px;
 .row0>.col{
 background:#aaa;
 }
+.row0>.head{
+background:#aaa;
+}
+
+.head{
+text-align: center;
+width:100px;
+float: left;
+border:1px solid #999;
+min-height: 20px;
+min-height: 20px;
+max-height: 20px;
+overflow:hidden;
+cursor:pointer;
+}
+.head0{
+background: #aaa;
+width:40px;
+}
+.sm{
+float: left;
+display: none;
+} 
+.bg{ 
+float: right;
+display: none;
+}
+#inphd{width:100%;}

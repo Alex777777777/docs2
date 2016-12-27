@@ -31,9 +31,19 @@ DocItCount=<?= $mitem;?>;
 <?php
 
 ?>
+<div class="inphdb"><input id="inphd"></div>
 <div class="doc" data-id='<?= $doc->id;?>'>
+<div class="row row0">
+       <?php 
+for($i=0;$i <= $doc->cols;$i++){  
+?>
+  <div class="head head<?= $i;?>" data-id="<?=$i?>"><span class="sm">&laquo;</span><?php if($i)echo $i;?><span class="bg">&raquo;</span></div>
+<?php
+}
+?>
+</div>
 <?php 
-for($i=0;$i <= $doc->rows;$i++){
+for($i=1;$i <= $doc->rows;$i++){
 ?>
 <div class="row row<?= $i;?>">
 <?php
@@ -66,3 +76,4 @@ for($ii=0;$ii <= $doc->cols;$ii++){
 </div>
 <div class="sd_ft"></div>
 <input id="inped" type="text" style="display:none; position:absolute;background: #f8f8c8;">
+
