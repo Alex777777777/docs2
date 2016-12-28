@@ -7,6 +7,7 @@ var $item;
 var $value;
 
 var $tbl;
+var $arr;
 function __construct(){
     $this->id=0;
     $this->doc_id=0;
@@ -35,6 +36,22 @@ function Save(){
     $mdb->do_query($lsql);
     if(!$mdb->LastErr)$this->LastErr=1;
 }
+
+function find($doc){
+    global $mdb;
+    $this->LastErr=0;
+    $lsql="SELECT id FROM ".$this->tbl;
+    $mdb->do_query($lsql);
+    $this->arr=array();
+    $this->arr[0]=0;
+    while($ret=$mdb->GetRow()){
+        $this->arr[0]++;
+        $this->arr[$this->arr[0]]=$ret['id'];
+    }
+    var_dump($this->arr);exit;
+    return($this->arr[0]);
+}
+
 function Insert(){
     global $mdb;
     $lcol="doc_id,param_type,item,value";

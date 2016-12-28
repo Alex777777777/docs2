@@ -199,9 +199,10 @@ $(document).ready(function(){
             case 39:
             case 40:
                 if(MoveEdtTo($(this),e.keyCode))SetValueEdt($(this));
+                e.preventDefault();
             break;
         }
-        e.preventDefault();
+        
     })
     $("#inphd").keydown(function(e) {
         switch(e.keyCode){ 

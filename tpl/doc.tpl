@@ -2,6 +2,7 @@
 require($PathLoc."/cls/docs.cls");
 require($PathLoc."/cls/item.cls");
 require($PathLoc."/cls/access.cls");
+require($PathLoc."/cls/params.cls");
 $acs=new Access();
 $acs->ClearLock($user->id);
 $itm=new Item();
@@ -10,6 +11,8 @@ $lid=$_GET["item"];
 $doc=new Docs();
 $doc->GetItem($lid);
 $cell=new Cell();
+$params = new Params();
+$params->find(lid);
 ?>
 <script>
 DocRowsCount=<?= $doc->rows;?>;
@@ -20,7 +23,7 @@ DocName='<?=$doc->name;?>';
 <div class='wrap'>
 <div class="sd_hd">
 <img src="img/users.jpg"  title="Пользователи">
-<img src="img/write.jpg" title="Записать">
+<img id="save_col" src="img/write.jpg" title="Записать">
 <img src="img/setting.jpg" title="Настройка">
 <div class="hd_descr"><div class="caps">Описание:</div><?= $doc->descr;?></div>
 </div>
