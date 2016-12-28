@@ -250,6 +250,72 @@ $(document).ready(function(){
         lid=$(this).attr("data-id");
         if(lid=="back"){window.location ="?do=docs"}
     })
+    $("#btn_setting").click(function(){
+        lid=$(".doc").attr("data-id");
+        param={
+        "tpl":"frm_setting",
+        "do":"get",
+        "id": lid
+        }
+        $.ajax({
+            type: "POST",
+            url: "command.php",
+            data: param,
+            cache: false,
+            async: true,
+            success: function(qstr){
+                if(qstr!="0"){
+                    obj=$("#ext-wrp");
+                    obj.html(qstr);
+                    obj.css("display","block");                    
+                }else alert("Ошибка выполнения!");                            
+            }
+        })
+    })
+    $("#btn_addrow").click(function(){
+        lid=$(".doc").attr("data-id");
+        param={
+        "tpl":"editdoc",
+        "do":"addrow",
+        "id": lid
+        }
+        $.ajax({
+            type: "POST",
+            url: "command.php",
+            data: param,
+            cache: false,
+            async: true,
+            success: function(qstr){
+                if(qstr!="0"){
+                    location.reload();
+                }else alert("Ошибка выполнения!");                            
+            }
+        })
+    })
+    $("#btn_addcol").click(function(){
+        lid=$(".doc").attr("data-id");
+        param={
+        "tpl":"editdoc",
+        "do":"addcol",
+        "id": lid
+        }
+        $.ajax({
+            type: "POST",
+            url: "command.php",
+            data: param,
+            cache: false,
+            async: true,
+            success: function(qstr){
+                if(qstr!="0"){
+                    location.reload();
+                }else alert("Ошибка выполнения!");                            
+            }
+        })
+    })
+    $("#btn_users").click(function(){
+        lc=document.location;
+        document.location=lc.origin+lc.pathname+"?do=users";
+    })
     $('#save_col').click(function(){
         $.ajax({
                 type: "POST",
@@ -262,7 +328,7 @@ $(document).ready(function(){
                     console.log(qstr);           
                 }
             });
-    });
+    })
     wh=DocColsCount*102+43;
     $(".row").width(wh);
     //GetUpdates();

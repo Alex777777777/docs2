@@ -21,10 +21,8 @@ function __construct(){
     $this->LastErr=0;
     $this->tbl="docs";
 }
-
 function __destruct() {
 }
-
 function Select($par=0){
     global $mdb;
     $this->LastErr=0;
@@ -40,7 +38,6 @@ function Select($par=0){
 }
 function GetItem($lid){
     global $mdb;
-    
     $this->id=0;
     $this->name="";
     $this->descr="";
@@ -95,6 +92,20 @@ function Insert(){
         return($this->id);
     }
     return(0);
+}
+function AddRow(){
+    global $mdb;
+    $this->LastErr=0;
+    $lsql="UPDATE ".$this->tbl." SET rows=rows+1 WHERE id=".$this->id;
+    $mdb->do_query($lsql);
+    if(!$mdb->LastErr)$this->LastErr=1;
+}
+function AddCol(){
+    global $mdb;
+    $this->LastErr=0;
+    $lsql="UPDATE ".$this->tbl." SET cols=cols+1 WHERE id=".$this->id;
+    $mdb->do_query($lsql);
+    if(!$mdb->LastErr)$this->LastErr=1;
 }
 function Delete(){
     global $mdb;

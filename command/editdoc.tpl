@@ -1,6 +1,18 @@
 <?php
 $ldo=$_POST["do"];
 switch($ldo){
+    case "addrow":
+        require("cls/docs.cls");
+        $obj=new Docs();
+        $obj->id=$_POST["id"];
+        $obj->AddRow();
+    break;
+    case "addcol":
+        require("cls/docs.cls");
+        $obj=new Docs();
+        $obj->id=$_POST["id"];
+        $obj->AddCol();
+    break;
     case "set":
         require("cls/item.cls");
         require("cls/access.cls");

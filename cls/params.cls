@@ -49,6 +49,7 @@ function find($doc){
         $this->arr[0]++;
         $this->arr[$this->arr[0]]=$ret;
     }
+
     unset($this->arr[0]);
     $f = array();
              foreach($this->arr as $key => $value){
@@ -56,6 +57,9 @@ function find($doc){
              }
     //var_dump($f);exit;
     return json_encode($f);
+
+   
+
 }
 
 function Insert(){
