@@ -1,35 +1,40 @@
 .side{
 }
 .sd_hd{
-font-size:14pt;
-text-align: left;
-display: flex;
-width: 800px;
-margin: 30px 10px 10px 25px;
+display: block;
+margin: 0 5px;
 }
-.hdl{width: 600px;}
-.hdl>div{width:100%;}
-.hdl>div>input{width: 550px;}
-.hdr{width: 200px;padding:5px;}
-.hdr>div>input{width: 180px;}
-.hd_btn{width: 150px;
-margin: 10px auto;
-text-align: center;
-background: #aaa;
-cursor:pointer;
+.hd_descr{
+border: 1px solid;
+width: 640px;
+height: 43px;
+padding: 5px;
 }
-
-.hd_btn:hover{
-    box-shadow: 1px 1px 5px #000;
+.hd_descr>.caps{
+position: relative;
+top: -5px;
+left: -5px;
+padding: 0 30px;
+background: #000;
+color: #fff;
+float: left;
+}
+.sd_hd img{
+display: block;
+float: right;
+width: 50px;
+margin: 5px 5px;
+}
+.sd_hd img:hover{
+box-shadow:0 0 5px #000;
+}
+.sd_bd{
+margin:5px;
 }
 .doc{
 overflow: auto;
 min-width: 800px;
 }
-.sd_bd{
-margin: 20px 0 0 20px;
-}
-
 .col{
 width:100px;
 float: left;
@@ -84,4 +89,4 @@ display: none;
 float: right;
 display: none;
 }
-#inphd{width:100%;}
+#inphd{}

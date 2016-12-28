@@ -1,8 +1,10 @@
 var LastCell;
 var TimeOfUpdate=10000;
+var MoveFlag=0;
 var colsParam = {
     "tpl":"column",
     "do":"colup",
+    "doc":$(".doc").attr("data-id"),
     "val":{},
 };
 function SetValueEdt(obj){
@@ -32,10 +34,92 @@ function SetValueEdt(obj){
         }
     });
 }
-
+function MoveEdtTo(lpar,lkey){
+    lstr=lpar.attr("data-id");
+    lstr=lstr.split('*').join('"');
+    pos=JSON.parse(lstr);
+    switch(lkey){
+        case 37:
+            if(pos.col==1)return;
+            lstr="{*row*:"+(pos.row)+",*col*:"+(pos.col-1)+"}";
+        break;
+        case 38:
+            if(pos.row==1)return;
+            lstr="{*row*:"+(pos.row-1)+",*col*:"+(pos.col)+"}";
+        break;
+        case 39:
+            if(pos.col==DocColsCount)return;
+            lstr="{*row*:"+(pos.row)+",*col*:"+(pos.col+1)+"}";
+        break;
+        case 40:
+            if(pos.row==DocRowsCount)return;
+            lstr="{*row*:"+(pos.row+1)+",*col*:"+pos.col+"}";
+        break;        
+    };
+    pkey=".col[data-id='"+lstr+"']";
+    MoveFlag=1;
+    MoveTo($(pkey));
+}
+function MoveTo(mthis)
+{   lid=mthis.attr("class");
+    if(lid=="col col0")return;
+    edt=$("#inped");
+    if(LastCell){
+        if(!edt.attr("readonly")){
+            if(edt.css("display")=="block"){
+                lval=LastCell.children("div").html().trim();
+                rval=edt.val().trim();
+                if(lval!=rval)SetValueEdt(edt);
+                
+            };
+        };
+    }
+    LastCell=mthis;
+    txt=LastCell.children("div").html();
+    ldoc=LastCell.parent().parent().attr("data-id");
+    lid=LastCell.attr("data-id");
+    edt.css({"background":"#f8f8c8"});
+    edt.attr("readonly",false);
+    edt.attr("data-id",LastCell.attr("data-id"));
+    param={
+    "tpl":"editdoc",
+    "do":"access",
+    "doc":ldoc,
+    "id":lid
+    }
+    $.ajax({
+        type: "POST",
+        url: "command.php",
+        data: param,
+        cache: false,
+        async: true,
+        success: function(qstr){
+            ret=JSON.parse(qstr);
+            edt=$("#inped");
+            if(ret.lock=="lock"){
+                edt.css({
+                    "background":"red",
+                });
+                edt.attr("readonly",true);
+                edt.attr("title","Заблокировано "+ret.user+" "+ret.date);
+            }else{
+                edt.css({
+                    "background":"#f8f8c8"
+                });
+                edt.attr("readonly",false);
+            }                
+        }
+    })
+    MoveEdt();
+    edt.val(txt);
+    $("#inphd").val(txt);
+    edt.select();
+    
+}
 function MoveEdt(){
     if(LastCell){
-        sc=$(".doc")[0].scrollLeft;
+        obj_doc=$(".doc")[0];
+        sc=obj_doc.scrollLeft;
         ll=LastCell[0].offsetLeft-sc;
         lt=LastCell[0].offsetTop;
         lw=LastCell[0].clientWidth-4;
@@ -48,7 +132,16 @@ function MoveEdt(){
             "left":ll,
             "display":"block"
         });
-        if(ll<200)edt.css("display","none");
+        if(MoveFlag==1){
+        wd=obj_doc.clientWidth;        
+        if(ll<0){
+            $(".doc").scrollLeft(sc+ll);
+        };
+        if(ll+lw>wd){
+            $(".doc").scrollLeft(sc+ll+lw-wd);
+        };
+        MoveFlag=0;
+        };
     };
 }
 function GetUpdates(){
@@ -82,100 +175,47 @@ function GetUpdates(){
             }                
         }
     })    
-setTimeout("GetUpdates()",TimeOfUpdate);
+//setTimeout("GetUpdates()",TimeOfUpdate);
 }
 $(window).resize(function(){
     MoveEdt();
-    wd=$(window)[0].innerWidth;
-    $(".doc").css("width",wd-250);
-    $(".inphdb").css("min-width",wd-250);
-    
-    
+    wd=$("body")[0].clientWidth;
+    wd=wd-10;
+    $(".doc").css("width",wd);
+    $("#inphd").css("width",wd-6);   
 });
 $(document).ready(function(){
     $(".col").click(function(){
-        edt=$("#inped");
-        if(LastCell){
-            if(!edt.attr("readonly")){
-                if(edt.css("display")=="block"){
-                    lval=LastCell.children("div").html().trim();
-                    rval=edt.val().trim();
-                    if(lval!=rval)SetValueEdt(edt);
-                    
-                };
-            };
-        }
-        LastCell=$(this);
-        txt=LastCell.children("div").html();
-        ldoc=LastCell.parent().parent().attr("data-id");
-        lid=LastCell.attr("data-id");
-        edt.css({"background":"#f8f8c8"});
-        edt.attr("readonly",false);
-        edt.attr("data-id",LastCell.attr("data-id"));
-        param={
-        "tpl":"editdoc",
-        "do":"access",
-        "doc":ldoc,
-        "id":lid
-        }
-        $.ajax({
-            type: "POST",
-            url: "command.php",
-            data: param,
-            cache: false,
-            async: true,
-            success: function(qstr){
-                ret=JSON.parse(qstr);
-                edt=$("#inped");
-                if(ret.lock=="lock"){
-                    edt.css({
-                        "background":"red",
-                    });
-                    edt.attr("readonly",true);
-                    edt.attr("title","Заблокировано "+ret.user+" "+ret.date);
-                }else{
-                    edt.css({
-                        "background":"#f8f8c8"
-                    });
-                    edt.attr("readonly",false);
-                }                
-            }
-        })
-        MoveEdt();
-        edt.val(txt);
-        $("#inphd").val(txt);
-        edt.select();
+        mthis=$(this);
+        MoveTo(mthis);
     })
     $("#inped").keydown(function(e) {
-        if(e.keyCode === 13) {
-            SetValueEdt($(this));
+        switch(e.keyCode){ 
+            case 13: 
+                SetValueEdt($(this));
+            break;
+            case 37:
+            case 38:
+            case 39:
+            case 40:
+                if(MoveEdtTo($(this),e.keyCode))SetValueEdt($(this));
+            break;
+        }
+        e.preventDefault();
+    })
+    $("#inphd").keydown(function(e) {
+        switch(e.keyCode){ 
+            case 13:
+                edt=$("#inped");
+                if(edt.css("display")=="block"){SetValueEdt(edt);$(this).val("");};
+            break;
         }
     })
-    $(".hd_btn").click(function(){
-        lname=$("#tb_name").val();
-        ldescr=$("#tb_descr").val();
-        lrows=$("#tb_rows").val();
-        lcols=$("#tb_cols").val();
-        param={
-            "tpl":"editdoc",
-            "do":"name",
-            "name":lname,
-            "descr":ldescr,
-            "rows":lrows,
-            "cols":lcols,
-            }
-            $.ajax({
-                type: "POST",
-                url: "command.php",
-                data: param,
-                cache: false,
-                async: true,
-                success: function(qstr){
-                    if(qstr=="0"){
-                        alarm("Ошибка!");
-                    }else location.reload();           
-                }
-            })
+    $("#inped").keypress(function(e) {
+        setTimeout('$("#inphd").val($("#inped").val());',100);
+    })
+    $("#inphd").keypress(function(e){
+        setTimeout('$("#inped").val($("#inphd").val());',100);
     })
     $('.head').hover(function(){
         $(this).find("span").css('display','block'); 
@@ -183,7 +223,6 @@ $(document).ready(function(){
     function(){
         $(this).find("span").css('display','none');
     });
-
     $('.head span.bg').click(function(){
        var sel = 'col'+$(this).parent().attr('data-id')+', .head'+$(this).parent().attr('data-id');
        $('.row').width($('.row').width()+10);
@@ -202,12 +241,14 @@ $(document).ready(function(){
        colsParam.val[column] = $(this).parent().width();
        MoveEdt();
        };
-    });
+    })
     $( ".doc" ).scroll(function() {
         MoveEdt();
-    });
-    
-    
+    })
+    $(".btn").click(function(){
+        lid=$(this).attr("data-id");
+        if(lid=="back"){window.location ="?do=docs"}
+    })
     $('#save_col').click(function(){
         $.ajax({
                 type: "POST",
@@ -221,8 +262,7 @@ $(document).ready(function(){
                 }
             });
     });
-    
     wh=DocColsCount*102+43;
-    $(".row").css("width",wh+"px");
-    GetUpdates();
+    $(".row").css("width",wh);
+    //GetUpdates();
 })

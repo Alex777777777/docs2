@@ -27,9 +27,11 @@ $(document).ready(function(){
     })
     $(".it_bt_x").click(function(){
         lid=$(this).parent().parent().parent().attr("data-id");
+        if(!confirm("Точьно удалить таблицу?"))return;
         param={
-            "tpl":"deldoc",
-            "id":lid,
+            "tpl":"cmd_docs",
+            "do":"del",
+            "id":lid
         };
         $.ajax({
             type: "POST",
@@ -40,15 +42,14 @@ $(document).ready(function(){
             success: function(qstr){
                 if(qstr=="1"){
                     document.location.reload()
-                }                 
+                }else alert("Ошибка удаления тыблицы!");                 
             }
         })
     })
-    $(".it_btn").click(function(){
-        lid=$(this).parent().parent().attr("data-id");
+    $("div.it_desc.itn").click(function(){
         param={
-            "tpl":"newdoc",
-            "project_id":lid,
+            "tpl":"cmd_docs",
+            "do":"new"
         };
         $.ajax({
             type: "POST",
@@ -57,8 +58,8 @@ $(document).ready(function(){
             cache: false,
             async: true,
             success: function(qstr){
-                if(qstr=="1")alert("Задание добавлено!");
-                else alert("Ошибка добавления задания!");                
+                if(qstr=="1") window.location.reload();
+                else alert("Ошибка добавления тыблицы!");                
             }
         })
     })

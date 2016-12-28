@@ -7,6 +7,6 @@
   }
   $do.=".tpl";
   require("header.tpl");
-  require("menu.tpl");
+  require($do);
   require("footer.tpl");
 ?>
