@@ -4,11 +4,6 @@ $(document).ready(function(){
         lnum=obj[0].offsetWidth;
         $(".btn[data-id='logout']").css({"left":lnum-120});
     })
-    $(".hd_panel").click(function(){
-        obj=$("body");
-        lnum=obj[0].offsetWidth;
-        $(".btn[data-id='logout']").css({"left":lnum-120});
-    })
     $(".btn[data-id='logout']").click(function(){
         document.location="?logout=true";
     }
@@ -17,5 +12,6 @@ $(document).ready(function(){
         lat=$(this).attr("data-item");
         document.location="?do="+lat;
     })
+    $(".hdp_caps").html(DocName);
     $(window).resize();
 })

@@ -1,18 +1,15 @@
 <?php
 require($PathLoc."/cls/docs.cls");
-    $caps="Личные документы";
-    $lid=$user->id;
-    if($do=="docsa.tpl"){
-        $caps="Общие документы";
-        $lid=0;
-    }
-    
 ?>
-<div class="sd_hd"><?php echo $caps;?></div>
+<script>
+DocName='Список документов';
+</script>
+<div class='wrap'>
+
 <div class="sd_bd">
 <?php
 $doc=new Docs();
-$doc->Select($lid);
+$doc->Select();
 for($i=1;$i<=$doc->arr[0];$i++){
     $doc->GetItem($doc->arr[$i]);
 ?>
@@ -21,9 +18,13 @@ for($i=1;$i<=$doc->arr[0];$i++){
 <div class='it_desc'><?php echo $doc->descr;?></div>
 </div>
     
-<?php
-        
+<?php       
 }
 ?>
+<div class="bd_item" data-id='0'>
+<div class='it_caps itn'><?php echo "Новый документ";?></div>
+<div class='it_desc itn'><div>Создать</div></div>
+</div>
 </div>
 <div class="sd_ft"></div>
+</div>

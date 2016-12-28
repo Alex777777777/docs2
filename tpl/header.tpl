@@ -41,6 +41,7 @@
 <body>
 <div id="ext-wrp"></div>
 <div class="hd_panel">
+<div class='hdp_caps'></div>
 <div class='btn' data-id="back">&ll;&ll; Back</div>
 <div class='btn' data-id="logout">Logout</div>
 </div>
