@@ -48,7 +48,7 @@ function find($doc){
         $this->arr[0]++;
         $this->arr[$this->arr[0]]=$ret['id'];
     }
-    var_dump($this->arr);exit;
+    //var_dump($this->arr);exit;
     return($this->arr[0]);
 }
 

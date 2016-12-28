@@ -22,9 +22,17 @@ DocName='<?=$doc->name;?>';
 </script>
 <div class='wrap'>
 <div class="sd_hd">
-<img src="img/users.jpg"  title="Пользователи">
+<?php
+if($user->role==1){
+?>
+<img id="btn_users" src="img/users.jpg"  title="Пользователи">
+<?php
+}    
+?>
 <img id="save_col" src="img/write.jpg" title="Записать">
-<img src="img/setting.jpg" title="Настройка">
+<img id="btn_setting" src="img/setting.jpg" title="Настройка">
+<img id="btn_addcol" src="img/addcol.jpg" title="Добавить колонку">
+<img id="btn_addrow" src="img/addrow.jpg" title="Добавить строку">
 <div class="hd_descr"><div class="caps">Описание:</div><?= $doc->descr;?></div>
 </div>
 <div class="sd_bd">
