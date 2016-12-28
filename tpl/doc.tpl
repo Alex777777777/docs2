@@ -39,7 +39,7 @@ if($user->role==1){
 <?php
 
 ?>
-<div id="params" data-id=<?=$tblP;?>>ddd</div>
+<div style="display: none;" id="params" data-id=<?=$tblP;?>>ddd</div>
 <div class="inphdb"><input id="inphd"></div>
 <div class="doc" data-id='<?= $doc->id;?>'>
 <div class="row row0">
