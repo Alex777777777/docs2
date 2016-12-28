@@ -1,7 +1,7 @@
 var LastCell;
 var TimeOfUpdate=10000;
 var colsParam = {
-    "tpl":"editdoc",
+    "tpl":"column",
     "do":"colup",
     "val":{},
 };
