@@ -40,16 +40,22 @@ function Save(){
 function find($doc){
     global $mdb;
     $this->LastErr=0;
-    $lsql="SELECT id FROM ".$this->tbl;
+    $lsql="SELECT `item`, `value` FROM `".$this->tbl."` WHERE `doc_id` = ".$doc." AND `param_type` = 'colWidth'";
     $mdb->do_query($lsql);
     $this->arr=array();
     $this->arr[0]=0;
+    
     while($ret=$mdb->GetRow()){
         $this->arr[0]++;
-        $this->arr[$this->arr[0]]=$ret['id'];
+        $this->arr[$this->arr[0]]=$ret;
     }
-    var_dump($this->arr);exit;
-    return($this->arr[0]);
+    unset($this->arr[0]);
+    $f = array();
+             foreach($this->arr as $key => $value){
+                 $f[$value['item']] = $value['value'];
+             }
+    //var_dump($f);exit;
+    return json_encode($f);
 }
 
 function Insert(){

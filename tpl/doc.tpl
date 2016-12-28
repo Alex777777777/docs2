@@ -12,7 +12,7 @@ $doc=new Docs();
 $doc->GetItem($lid);
 $cell=new Cell();
 $params = new Params();
-$params->find(lid);
+$tblP = $params->find($lid);
 ?>
 <script>
 DocRowsCount=<?= $doc->rows;?>;
@@ -31,6 +31,7 @@ DocName='<?=$doc->name;?>';
 <?php
 
 ?>
+<div id="params" data-id=<?=$tblP;?>>ddd</div>
 <div class="inphdb"><input id="inphd"></div>
 <div class="doc" data-id='<?= $doc->id;?>'>
 <div class="row row0">

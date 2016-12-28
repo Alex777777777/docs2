@@ -264,6 +264,6 @@ $(document).ready(function(){
             });
     });
     wh=DocColsCount*102+43;
-    $(".row").css("width",wh);
+    $(".row").width(wh);
     //GetUpdates();
 })
