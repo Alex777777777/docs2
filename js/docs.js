@@ -27,7 +27,7 @@ $(document).ready(function(){
     })
     $(".it_bt_x").click(function(){
         lid=$(this).parent().parent().parent().attr("data-id");
-        if(!confirm("Точьно удалить таблицу?"))return;
+        if(!confirm("Действительно удалить таблицу?"))return;
         param={
             "tpl":"cmd_docs",
             "do":"del",
