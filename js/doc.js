@@ -175,7 +175,7 @@ function GetUpdates(){
             }                
         }
     })    
-//setTimeout("GetUpdates()",TimeOfUpdate);
+setTimeout("GetUpdates()",TimeOfUpdate);
 }
 $(window).resize(function(){
     MoveEdt();
