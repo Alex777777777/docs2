@@ -1,8 +1,16 @@
 $(document).ready(function(){
+    $(".btn[data-id='back']").click(function(){
+        lc=document.location;
+        document.location=lc.origin+lc.pathname+"?do=docs";
+    })
     $("div.it_btn.it_edit").click(function(){
         lid=$(this).parent().parent().attr("data-id");
         lc=document.location;
         document.location=lc.origin+lc.pathname+"?do=newuser&item="+lid;
+    })
+    $("#btn_newuser").click(function(){
+        lc=document.location;
+        document.location=lc.origin+lc.pathname+"?do=newuser";
     })
     $("div.it_btn.it_froz").click(function(){
         lid=$(this).parent().parent().attr("data-id");

@@ -12,6 +12,5 @@ $(document).ready(function(){
         lat=$(this).attr("data-item");
         document.location="?do="+lat;
     })
-    $(".hdp_caps").html(DocName);
     $(window).resize();
 })

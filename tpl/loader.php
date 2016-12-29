@@ -5,6 +5,10 @@
   if(($do=='doc')AND(!isset($_GET["item"]))){
       $do="docsa";
   }
+  $do=strtolower($do);
+  if(($do=="users")or($do=="newuser")){
+      if($user->role!=1)$do="docsa";
+  }
   $do.=".tpl";
   require("header.tpl");
   require($do);

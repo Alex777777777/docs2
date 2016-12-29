@@ -9,8 +9,6 @@
 <div class="sd_hd"><?php echo $caps;?></div>
 <form autocomplete="off" data-id="<?php echo $nuser->id;?>">
 <div class="frm_str"><label for="usr_name">Логин</label><input id="usr_name" autocomplete="off" type="text" placeholder="логин" required value="<?php echo $nuser->login;?>" <?php  if($nuser->id) echo " readonly";?>></div>
-<div class="frm_str"><label for="usr_jab">Jabber</label><input id="usr_jab" autocomplete="off" type="email" placeholder="имя@jabber.ru" required value="<?php echo $nuser->jabber;?>"></div>
-<div class="frm_str"><label for="usr_api">API key</label><input id="usr_api" autocomplete="off" type="text" value="<?php echo $nuser->apikey;?>"></div>
 <div class="frm_str"><label for="usr_role">Тип пользователя</label>
 <select id="usr_role" size=1>
   <option <?php if($nuser->role==9)echo selected;?> value="9">Пользователь</option>

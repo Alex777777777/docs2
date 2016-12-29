@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    $(".btn[data-id='back']").click(function(){
+        lc=document.location;
+        document.location=lc.origin+lc.pathname+"?do=users";
+    })
     $(".button").click(function(){
         $("#usr_resume").html("Отправка запроса");
         $("#usr_resume").css("color","green");
@@ -6,8 +10,6 @@ $(document).ready(function(){
         $("#usr_pass").css("border","1px solid #aaa");
         $("#usr_name").css("border","1px solid #aaa");
         lname=$("#usr_name").val();
-        ljab=$("#usr_jab").val();
-        lapi=$("#usr_api").val();
         lpass=$("#usr_pass").val();
         lpass1=$("#usr_pass1").val();
         lrole=$("#usr_role").val();
@@ -38,8 +40,6 @@ $(document).ready(function(){
             "tpl":"adduser",
             "id":lid,
             "name":lname,
-            "jabb":ljab,
-            "apikey":lapi,
             "pass":lpass,
             "pass1":lpass1,
             "role":lrole,

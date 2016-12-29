@@ -63,4 +63,5 @@ $(document).ready(function(){
             }
         })
     })
+    $(".hdp_caps").html(DocName);
 })
