@@ -55,15 +55,34 @@ function find($doc){
              foreach($this->arr as $key => $value){
                  $f[$value['item']] = $value['value'];
              }
-    //var_dump($f);exit;
+    
     return json_encode($f);
 
    
 
 }
 
+
+
 function Insert(){
     global $mdb;
+    
+    $lsql="SELECT `id` FROM `".$this->tbl."` WHERE `doc_id` = ".$this->doc_id." AND `param_type` = 'colWidth' AND `item` = ".$this->item;
+    $mdb->do_query($lsql);
+    $this->arr=array();
+    $this->arr[0]=0;
+    
+    $ret=$mdb->GetRow();
+    if($ret){
+        $q = "UPDATE `".$this->tbl."` SET `value`='".$this->value."' WHERE `id`=".$ret['id'];
+        $mdb->do_query($q);
+        //echo $q;exit;
+        return $ret['id'];
+    }
+    
+    
+    
+    
     $lcol="doc_id,param_type,item,value";
     $lstr= "'".$this->doc_id."'";
     $lstr.= ",'".$this->param_type."'";
