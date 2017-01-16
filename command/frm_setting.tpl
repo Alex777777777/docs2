@@ -1,21 +1,29 @@
 <?php
 require("cls/docs.cls");
+require("cls/item.cls");
 $do=$_POST["do"];
 $lid=$_POST["id"];
 $obj=new Docs();
 $obj->GetItem($lid);
 if($do=="set"){
-    $obj->name=$_POST["name"];
-    $obj->descr=$_POST["descr"];
-    $obj->rows= $_POST["rows"];
-    $obj->cols= $_POST["cols"];
-    $obj->Save();
+    if(isset($_POST["cript"])){
+        $pukey=$_POST["pukey"];
+        $prkey=$_POST["prkey"];
+        $obj->recript($pukey,$prkey);
+        echo "1";
+        exit;
+    }else{
+        $obj->name=$_POST["name"];
+        $obj->descr=$_POST["descr"];
+        $obj->rows= $_POST["rows"];
+        $obj->cols= $_POST["cols"];
+        $obj->Save();
+    };
     if(!$obj->LastErr) echo "1";
     else echo "0";
     exit;
 }
-if($do=="get"){
-    
+if($do=="get"){    
 ?>
 
 <style>
@@ -70,6 +78,9 @@ $(".ef_btn").click(function(){
         ldescr=$("#ef_descr").val();
         lrows=$("#ef_rows").val();
         lcols=$("#ef_cols").val();
+        lcript=$("#ef_cript").val();
+        pukey=localStorage.getItem("public_key");
+        prkey=localStorage.getItem("private_key");
         param={
         "tpl":"frm_setting",
         "do":"set",
@@ -77,7 +88,10 @@ $(".ef_btn").click(function(){
         "name":lname,
         "descr":ldescr,
         "rows":lrows,
-        "cols":lcols
+        "cols":lcols,
+        "cript":lcript,
+        "pukey":pukey,
+        "prkey":prkey
         }
         $.ajax({
             type: "POST",
@@ -117,8 +131,19 @@ $(".ef_btn").click(function(){
     <input id='ef_cols' value="<?=$obj->cols;?>">
 </div>
 <div class="ef_line str">
+    <div class="titl" style="width: 165px;">Перекодировать:</div>
+    <?php
+    $isCript="";
+    if($obj->isCript)$isCript="checked";
+    ?>
+    <input id='ef_cript' type="checkbox" value="1" <?=$isChek;?>>
+</div>
+<div class="ef_line str">
     <div class="ef_btn" data-id="ok">ОК</div>
     <div class="ef_btn" data-id="er">Отмена</div>
+</div>
+<div class="ef_line1">
+
 </div>
 </div>
 

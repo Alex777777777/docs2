@@ -32,6 +32,7 @@
             echo "<link rel='stylesheet' type='text/css' href='css/doc.css'>\n";
             echo "<script src='js/doc.js' type='text/javascript'></script>\n";
             echo "<script src='js/params.js'></script>\n";
+            echo "<script src='js/jsencrypt.js'></script>\n";
         break;
         case "newdoc.tpl":
             echo "<link rel='stylesheet' type='text/css' href='css/newdoc.css'>\n";

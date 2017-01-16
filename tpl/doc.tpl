@@ -7,9 +7,11 @@ $acs=new Access();
 $acs->ClearLock($user->id);
 $itm=new Item();
 $mitem=$itm->GetMaxItem();
+if(!$mitem)$mitem="0";
 $lid=$_GET["item"];
 $doc=new Docs();
 $doc->GetItem($lid);
+$icript=$doc->GetCriptData();
 $cell=new Cell();
 $params = new Params();
 $tblP = $params->find($lid);
@@ -19,6 +21,7 @@ DocRowsCount=<?= $doc->rows;?>;
 DocColsCount=<?= $doc->cols;?>;
 DocItCount=<?= $mitem;?>;
 DocName='<?=$doc->name;?>';
+DocIsCript=<?=$icript["cript"]?>;
 </script>
 <div class='wrap'>
 <div class="sd_hd">
@@ -26,11 +29,12 @@ DocName='<?=$doc->name;?>';
 if($user->role==1){
 ?>
 <img id="btn_users" src="img/users.jpg"  title="Пользователи">
+<img id="btn_setting" src="img/setting.jpg" title="Настройка">
 <?php
 }    
 ?>
 <img id="save_col" src="img/write.jpg" title="Записать">
-<img id="btn_setting" src="img/setting.jpg" title="Настройка">
+<img id="btn_pgp" src="img/pgp.jpg" title="Ключи pgp">
 <img id="btn_addcol" src="img/addcol.jpg" title="Добавить колонку">
 <img id="btn_addrow" src="img/addrow.jpg" title="Добавить строку">
 <div class="hd_descr"><div class="caps">Описание:</div><?= $doc->descr;?></div>

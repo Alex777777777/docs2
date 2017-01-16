@@ -1,3 +1,6 @@
 /Jabber/
 /cls/db_param.inc
-
+/cls/private.cls
+/cls/public.cls
+/cls/cript.ini
+/temp/

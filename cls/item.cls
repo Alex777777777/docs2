@@ -8,6 +8,7 @@ var $item_id;
 var $value;
 var $LastErr;
 var $tbl;
+var $arr;
 function __construct(){
     $this->id=0;
     $this->doc_id=0;
@@ -21,12 +22,46 @@ function __construct(){
 
 function __destruct() {
 }
+function Select(){
+    global $mdb;
+    $this->LastErr=0;
+    $this->arr=array();
+    $this->arr[0]=0;
+    $lsql="SELECT id FROM ".$this->tbl;
+    $mdb->do_query($lsql);
+    while($row=$mdb->GetRow()){
+        $this->arr[0]++;
+        $this->arr[$this->arr[0]]=$row["id"];
+    };
+    return($this->arr[0]);
+}
 function GetCell(){
     global $mdb;
     $this->id=0;
     $this->item_id=0;
     $this->LastErr=1;
     $lsql="SELECT * FROM ".$this->tbl." WHERE ((doc_id=".$this->doc_id.")AND(row=".$this->row.")AND(col=".$this->col."))";
+    $mdb->do_query($lsql);
+    if($mdb->LastErr){
+        $ret=$mdb->GetRow();
+        if($ret){
+            $this->id=$ret["id"];
+            $this->doc_id=$ret["doc_id"];
+            $this->row=$ret["row"];
+            $this->col=$ret["col"];
+            $this->item_id=$ret["item_id"];
+            $this->LastErr=0;
+        }else $this->LastErr=2;    
+    }
+}
+function GetItem($lid){
+    global $mdb;
+    $this->doc_id=0;
+    $this->row=0;
+    $this->col=0;
+    $this->item_id=0;
+    $this->LastErr=1;
+    $lsql="SELECT * FROM ".$this->tbl." WHERE id=$lid";
     $mdb->do_query($lsql);
     if($mdb->LastErr){
         $ret=$mdb->GetRow();
@@ -126,6 +161,28 @@ class Item{
             $this->LastErr=0;
         }else{
             $this->LastErr=2;
+        }
+    }
+    function Update(){
+        global $mdb;
+        $lsql="UPDATE ".$this->tbl." SET value='".$this->value."' WHERE id=$this->id";
+        $mdb->do_query($lsql);
+        if($mdb->LastErr){
+            $this->LastErr=0;
+        }else{
+            $this->LastErr=2;
+        }
+    }
+    function ClearCell($lcell){
+        global $mdb;
+        $id=$lcell->id;
+        $it=$lcell->item_id;
+        $lsql="DELETE FROM $this->tbl WHERE ((cell_id=$id)AND(id<>$it))";
+        $mdb->do_query($lsql);
+        if($mdb->LastErr){
+            $this->LastErr=0;
+        }else{
+            $this->LastErr=1;
         }
     }
 }
