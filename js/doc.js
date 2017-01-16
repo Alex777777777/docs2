@@ -312,6 +312,26 @@ $(document).ready(function(){
             }
         })
     })
+    $("#btn_clean").click(function(){
+        param={
+        "tpl":"frm_clean",
+        "do":"get"
+        }
+        $.ajax({
+            type: "POST",
+            url: "command.php",
+            data: param,
+            cache: false,
+            async: true,
+            success: function(qstr){
+                if(qstr!="0"){
+                    obj=$("#ext-wrp");
+                    obj.html(qstr);
+                    obj.css("display","block");                    
+                }else alert("Ошибка выполнения!"); 
+            }
+        })
+    })
     $("#btn_addrow").click(function(){
         lid=$(".doc").attr("data-id");
         param={

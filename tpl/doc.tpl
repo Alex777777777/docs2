@@ -30,6 +30,7 @@ if($user->role==1){
 ?>
 <img id="btn_users" src="img/users.jpg"  title="Пользователи">
 <img id="btn_setting" src="img/setting.jpg" title="Настройка">
+<img id="btn_clean" src="img/clean.jpg" title="Очистка ключей">
 <?php
 }    
 ?>
