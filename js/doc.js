@@ -185,7 +185,7 @@ function GetUpdates(){
                     DocItCount=arr.id;
                     lkey=".col[data-id='{*row*:"+arr.row+",*col*:"+arr.col+"}']";
                     lval=arr.val;
-                    if(DocIsCript)lval=crypt.decrypt(lval);
+                    if(DocIsCript)lval=lcrpt.decrypt(lval);
                     $(lkey).children("div").html(lval);
                     ltxt="Изменил "+arr.user+" "+arr.date;
                     $(lkey).attr("title",ltxt);
@@ -195,7 +195,7 @@ function GetUpdates(){
             }                
         }
     })    
-//setTimeout("GetUpdates()",TimeOfUpdate);
+setTimeout("GetUpdates()",TimeOfUpdate);
 }
 $(window).resize(function(){
     MoveEdt();
@@ -392,5 +392,5 @@ $(document).ready(function(){
     wh=DocColsCount*102+43;
     $(".row").width(wh);
     ReCriptDoc();
-    //GetUpdates();
+    GetUpdates();
 })
