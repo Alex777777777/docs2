@@ -392,5 +392,5 @@ $(document).ready(function(){
     wh=DocColsCount*102+43;
     $(".row").width(wh);
     ReCriptDoc();
-    //GetUpdates();
+    GetUpdates();
 })
