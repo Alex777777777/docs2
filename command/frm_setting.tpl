@@ -78,7 +78,8 @@ $(".ef_btn").click(function(){
         ldescr=$("#ef_descr").val();
         lrows=$("#ef_rows").val();
         lcols=$("#ef_cols").val();
-        lcript=$("#ef_cript").val();
+        lcript=0;
+        if($("#ef_cript").prop('checked'))lcript=1;
         pukey=localStorage.getItem("public_key");
         prkey=localStorage.getItem("private_key");
         param={

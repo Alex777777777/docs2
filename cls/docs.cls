@@ -119,8 +119,8 @@ function GetCriptData(){
     $fpath=$PathLoc."/cls/cript.ini";
     if(!file_exists($fpath)){
         $arr="{
-            'cript':0,
-            'hesh':0
+            \"cript\":0,
+            \"hesh\":0
         }";
         file_put_contents($fpath,$arr);
     };
@@ -133,8 +133,8 @@ function recript($pukey,$prkey){
     $fpath=$PathLoc."/cls/cript.ini";
     if(!file_exists($fpath)){
         $arr="{
-            'cript':0,
-            'hesh':0
+            \"cript\":0,
+            \"hesh\":0
         }";
         file_put_contents($fpath,$arr);
     }
@@ -189,10 +189,10 @@ function recript($pukey,$prkey){
         $it->Update();
     };
     $pukey_crc=crc32($pukey_data);
-    $arr="{
-    'cript':1,
-    'hesh':$pukey_crc
-    }";
+    $arr='{
+    "cript":1,
+    "hesh":$pukey_crc
+    }';
     $pathpr=$PathLoc."/cls/private.cls";
     $pathpu=$PathLoc."/cls/public.cls";
     file_put_contents($fpath,$arr);
