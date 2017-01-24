@@ -8,22 +8,6 @@ var colsParam = {
     "doc":$(".doc").attr("data-id"),
     "val":{}
 };
-/*function ReCriptDoc(){
-    if(DocIsCript==0)return;
-    lcrpt=new JSEncrypt();
-    if(localStorage.public_key)lcrpt.setPublicKey(localStorage.public_key);
-    if(localStorage.private_key)lcrpt.setPrivateKey(localStorage.private_key);
-    arr=$(".col>div");
-    arr.each(function(i,elem){
-        if($(elem).parent().hasClass("col0")==false){
-            ldt=$(elem).html();
-            if(ldt){
-            ldt=lcrpt.decrypt(ldt);
-            $(elem).html(ldt);
-            };
-        };
-    });
-} */
 function SetValueEdt(obj){
     lid=obj.attr("data-id");
     obj.removeAttr("data-id");
@@ -31,7 +15,6 @@ function SetValueEdt(obj){
     LastCell.children("div").html(lval);
     ldoc=LastCell.parent().parent().attr("data-id");
     obj.css("display","none");
-    //if(DocIsCript)lval=lcrpt.encrypt(lval);
     param={
     "tpl":"editdoc",
     "do":"set",
