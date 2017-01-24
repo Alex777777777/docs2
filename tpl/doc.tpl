@@ -11,7 +11,6 @@ if(!$mitem)$mitem="0";
 $lid=$_GET["item"];
 $doc=new Docs();
 $doc->GetItem($lid);
-$icript=$doc->GetCriptData();
 $cell=new Cell();
 $params = new Params();
 $tblP = $params->find($lid);
@@ -21,7 +20,6 @@ DocRowsCount=<?= $doc->rows;?>;
 DocColsCount=<?= $doc->cols;?>;
 DocItCount=<?= $mitem;?>;
 DocName='<?=$doc->name;?>';
-DocIsCript=<?=$icript["cript"]?>;
 </script>
 <div class='wrap'>
 <div class="sd_hd">

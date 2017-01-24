@@ -8,7 +8,7 @@ var colsParam = {
     "doc":$(".doc").attr("data-id"),
     "val":{}
 };
-function ReCriptDoc(){
+/*function ReCriptDoc(){
     if(DocIsCript==0)return;
     lcrpt=new JSEncrypt();
     if(localStorage.public_key)lcrpt.setPublicKey(localStorage.public_key);
@@ -23,7 +23,7 @@ function ReCriptDoc(){
             };
         };
     });
-}
+} */
 function SetValueEdt(obj){
     lid=obj.attr("data-id");
     obj.removeAttr("data-id");
@@ -31,7 +31,7 @@ function SetValueEdt(obj){
     LastCell.children("div").html(lval);
     ldoc=LastCell.parent().parent().attr("data-id");
     obj.css("display","none");
-    if(DocIsCript)lval=lcrpt.encrypt(lval);
+    //if(DocIsCript)lval=lcrpt.encrypt(lval);
     param={
     "tpl":"editdoc",
     "do":"set",
@@ -185,7 +185,7 @@ function GetUpdates(){
                     DocItCount=arr.id;
                     lkey=".col[data-id='{*row*:"+arr.row+",*col*:"+arr.col+"}']";
                     lval=arr.val;
-                    if(DocIsCript)lval=lcrpt.decrypt(lval);
+                    //if( DocIsCript )lval=lcrpt.decrypt(lval);
                     $(lkey).children("div").html(lval);
                     ltxt="Изменил "+arr.user+" "+arr.date;
                     $(lkey).attr("title",ltxt);
@@ -391,6 +391,6 @@ $(document).ready(function(){
     })
     wh=DocColsCount*102+43;
     $(".row").width(wh);
-    ReCriptDoc();
-    GetUpdates();
+    //ReCriptDoc();
+    //GetUpdates();
 })
