@@ -2,10 +2,11 @@
 // @name        SITableCrypt
 // @namespace   SITable
 // @description Криптовая система таблицы
-// @include     http://shell.loc/docs2/*
-// @require  http://shell.loc/docs2/js/jquery.js
+// @include     http://80.84.49.93/docs2/*
+// @require     http://shell.loc/docs2/js/jquery.js
 // @version     1
 // @grant       none
+// @author      Alex Vasit 
 // ==/UserScript==
 try{
 if(typeof DocName !== "undefined"){    
