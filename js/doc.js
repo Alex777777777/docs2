@@ -1,18 +1,31 @@
 var LastCell;
 var TimeOfUpdate=10000;
 var MoveFlag=0;
-var lcrpt;
 var colsParam = {
     "tpl":"column",
     "do":"colup",
     "doc":$(".doc").attr("data-id"),
     "val":{}
 };
+function ReCriptDoc(){
+    if(DocIsCript==0)return;
+    arr=$(".col>div");
+    arr.each(function(i,elem){
+        if($(elem).parent().hasClass("col0")==false){
+            ldt=$(elem).html();
+            if(ldt){
+            ldt=cript.decrypt(ldt);
+            $(elem).html(ldt);
+            };
+        };
+    });
+}
 function SetValueEdt(obj){
     lid=obj.attr("data-id");
     obj.removeAttr("data-id");
     lval=obj.val();
     LastCell.children("div").html(lval);
+    if( DocIsCript )lval=cript.encrypt(lval);
     ldoc=LastCell.parent().parent().attr("data-id");
     obj.css("display","none");
     param={
@@ -168,7 +181,7 @@ function GetUpdates(){
                     DocItCount=arr.id;
                     lkey=".col[data-id='{*row*:"+arr.row+",*col*:"+arr.col+"}']";
                     lval=arr.val;
-                    //if( DocIsCript )lval=lcrpt.decrypt(lval);
+                    if( DocIsCript )lval=cript.decrypt(lval);
                     $(lkey).children("div").html(lval);
                     ltxt="Изменил "+arr.user+" "+arr.date;
                     $(lkey).attr("title",ltxt);
@@ -295,26 +308,6 @@ $(document).ready(function(){
             }
         })
     })
-    $("#btn_clean").click(function(){
-        param={
-        "tpl":"frm_clean",
-        "do":"get"
-        }
-        $.ajax({
-            type: "POST",
-            url: "command.php",
-            data: param,
-            cache: false,
-            async: true,
-            success: function(qstr){
-                if(qstr!="0"){
-                    obj=$("#ext-wrp");
-                    obj.html(qstr);
-                    obj.css("display","block");                    
-                }else alert("Ошибка выполнения!"); 
-            }
-        })
-    })
     $("#btn_addrow").click(function(){
         lid=$(".doc").attr("data-id");
         param={
@@ -360,6 +353,7 @@ $(document).ready(function(){
         document.location=lc.origin+lc.pathname+"?do=users";
     })
     $('#save_col').click(function(){
+        
         $.ajax({
                 type: "POST",
                 url: "command.php",
@@ -374,6 +368,5 @@ $(document).ready(function(){
     })
     wh=DocColsCount*102+43;
     $(".row").width(wh);
-    //ReCriptDoc();
-    //GetUpdates();
+    GetUpdates();
 })

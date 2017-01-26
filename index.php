@@ -1,5 +1,9 @@
 <?php
 session_start();
+ if(!strpos($_SERVER["HTTP_USER_AGENT"],"Firefox")){
+     echo "Только для Firefox.";
+     exit;
+ } ;
 $PathLoc=__DIR__;
 $mdb=require("cls/db_class.cls");
 $mdb->OpenDB();

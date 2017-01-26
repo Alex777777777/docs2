@@ -17,7 +17,7 @@ class db_one{
         $this->LastErr=FALSE;
         if($this->lqr<>FALSE) {
 		    $this->LastErr=TRUE;
-            return(mysqli_fetch_array($this->lqr, MYSQL_ASSOC));
+            return(mysqli_fetch_assoc($this->lqr));
         } else {
             $this->LastErr=FALSE;
         };

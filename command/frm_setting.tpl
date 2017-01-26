@@ -20,7 +20,7 @@ if($do=="get"){
 <style>
 #ext_frm{
 min-width: 300px;
-height: 400px;
+height: 330px;
 width: 300px;
 margin: 150px auto;
 background: #fff;

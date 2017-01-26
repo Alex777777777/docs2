@@ -14,12 +14,24 @@ $doc->GetItem($lid);
 $cell=new Cell();
 $params = new Params();
 $tblP = $params->find($lid);
+$fpath=$PathLoc."/cls/cript.ini";
+if(!file_exists($fpath)){
+    $arr="{
+        \"cript\":0,
+        \"hesh\":0
+    }";
+    file_put_contents($fpath,$arr);
+}
+$par=file_get_contents($fpath);
+$par=json_decode($par);
 ?>
 <script>
-DocRowsCount=<?= $doc->rows;?>;
-DocColsCount=<?= $doc->cols;?>;
-DocItCount=<?= $mitem;?>;
-DocName='<?=$doc->name;?>';
+var cript=0;
+var DocRowsCount=<?= $doc->rows;?>;
+var DocColsCount=<?= $doc->cols;?>;
+var DocItCount=<?= $mitem;?>;
+var DocName='<?=$doc->name;?>';
+var DocIsCript=<?=$par->cript;?>;
 </script>
 <div class='wrap'>
 <div class="sd_hd">
@@ -28,7 +40,7 @@ if($user->role==1){
 ?>
 <img id="btn_users" src="img/users.jpg"  title="Пользователи">
 <img id="btn_setting" src="img/setting.jpg" title="Настройка">
-<img id="btn_clean" src="img/clean.jpg" title="Очистка ключей">
+<img id="btn_recript" src="img/recript.jpg" title="Перекодировать">
 <?php
 }    
 ?>

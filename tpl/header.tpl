@@ -8,7 +8,6 @@
 <title>Docs-документы</title>
 <link rel="shortcut icon" href="img/favicon.png" type="image/png">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/menu.css">
 <script src="js/jquery.js"></script>
 <script src="js/script.js"></script>
 

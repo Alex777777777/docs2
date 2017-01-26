@@ -44,13 +44,6 @@ box-shadow: 0 0 10px #000;
 </style>
 <script>
 $(window).ready(function(){
-$(".ef_btn").click(function(){
-    ret=$(this).attr("data-id");
-    obj=$("#ext-wrp");
-    obj.css("display","none");
-    obj.html("");
-});
-eval("Load_gpg();");
 });
 </script>
 <div id='ext_frm'>
