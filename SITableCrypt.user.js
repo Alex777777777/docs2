@@ -2,8 +2,8 @@
 // @name        SITableCrypt
 // @namespace   SITable
 // @description Криптовая система таблицы
-// @include     http://shell.loc/docs2/*
-// @require     http://shell.loc/docs2/js/jquery.js
+// @include     http://80.84.49.93/docs2/*
+// @require     http://80.84.49.93/docs2/js/jquery.js
 // @version     1
 // @grant       none
 // ==/UserScript==
@@ -29,6 +29,7 @@ $(document).on('click', '.ef_btn', function(){
     obj=$("#ext-wrp");
     obj.css("display","none");
     obj.html("");
+    unsafeWindow.location.reload(); 
 });
 $(document).on('click', '#btn_recript', function(){
     if(!confirm("Перекодировать таблицы?"))return;
