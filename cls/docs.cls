@@ -126,6 +126,14 @@ function recript($pukey,$prkey){
     }
     $par=file_get_contents($fpath);
     $par=json_decode($par,true);
+    $recript=0;
+    $tmp="";
+    $prk  = openssl_get_privatekey($prkey);
+   if($par["cript"]==1){
+        openssl_private_decrypt(base64_decode($par["hesh"]), $tmp, $prk);
+        if($tmp!="admin"){echo '7';exit;}
+        else $recript=1;
+    };
     $dn = array();
     $config = array("private_key_bits"=>2048);
     $res_privkey = openssl_pkey_new($config);
@@ -139,43 +147,42 @@ function recript($pukey,$prkey){
     $pukey_data="";
     $keyData = openssl_pkey_get_details($res_pubkey);
     $pukey_data=$keyData['key'];  
-    $recript=0;
-    if($par["cript"]==1){
-        $lh=crc32($pukey);
-        if($par["hesh"]!=$lh){echo '7';return(1);}
-        else $recript=1;
-    };
+    
     $cell=new Cell();
     $it=new Item();
-    $prk  = openssl_get_privatekey($prkey);
+    
     $cell->Select();
+    $tmp="";
     for($i=1;$i<=$cell->arr[0];$i++){
+        $tmp="";
         $cell->GetItem($cell->arr[$i]);
         $it->ClearCell($cell);
         $val=$it->GetValue($cell->item_id);
         if($recript){
-            $out="";
-            openssl_private_decrypt(base64_decode($val), $out, $prk);
-            $cell->value=$out;
+            openssl_private_decrypt(base64_decode($val), $tmp, $prk);
+            $cell->value=$tmp;
         }else{
             $cell->value=$val;
         };
         $in=$cell->value;
         $in=substr($in,0,245);
-        $out="";
+        $tmp="";
         $it->id=$cell->item_id;
         if($in!==FALSE){
-            openssl_public_encrypt ($in, $out,$res_pubkey);
-            $it->value=base64_encode($out);
+            openssl_public_encrypt ($in, $tmp,$res_pubkey);
+            $it->value=base64_encode($tmp);
         }else{
             $it->value="";            
         }
         $it->Update();
     };
-    $pukey_crc=crc32($pukey_data);
+    $tmp="";
+    $in="admin";
+    openssl_public_encrypt($in,$tmp,$res_pubkey);
+    $tmp=base64_encode($tmp);
     $arr="{
     \"cript\":1,
-    \"hesh\":$pukey_crc
+    \"hesh\":\"$tmp\"
     }";
     file_put_contents($fpath,$arr);
     
