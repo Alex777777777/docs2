@@ -2,11 +2,10 @@
 // @name        SITableCrypt
 // @namespace   SITable
 // @description Криптовая система таблицы
-// @include     http://80.84.49.93/docs2/*
+// @include     http://shell.loc/docs2/*
 // @require     http://shell.loc/docs2/js/jquery.js
 // @version     1
 // @grant       none
-// @author      Alex Vasit 
 // ==/UserScript==
 try{
 if(typeof DocName !== "undefined"){    
@@ -48,8 +47,12 @@ $(document).on('click', '#btn_recript', function(){
         cache: false,
         async: true,
         success: function(qstr){
-            if((qstr=="0")){
+            if((qstr==="0")){
                 alert("Ошибка выполнения!");
+                return;
+            };
+            if((!qstr)){
+                alert("Внутренняя ошибка выполнения!");
                 return;
             };
             if(qstr=="7"){
@@ -64,14 +67,18 @@ $(document).on('click', '#btn_recript', function(){
                 alert("Ошибка!\nНедостаточно прав.");
                 return;
             };
-            alert("Таблицы перекодированы!");
             obj=$("#ext-wrp");
             obj.html("");
             obj.css("display","none");
-            arr=jQuery.parseJSON(qstr);
-            ls=unsafeWindow.localStorage;
-            ls.setItem("public_key",arr.puk);
-            ls.setItem("private_key",arr.prk);            
+            arr=jQuery.parseJSON(qstr,true);
+            console.log(arr);
+            if(arr){
+                ls=unsafeWindow.localStorage;
+                ls.setItem("public_key",arr.puk);
+                ls.setItem("private_key",arr.prk);
+                alert("Таблицы перекодированы!");
+            }
+            unsafeWindow.location.reload();            
         }
     })
 });
